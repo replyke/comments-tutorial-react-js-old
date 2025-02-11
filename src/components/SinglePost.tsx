@@ -1,12 +1,14 @@
-import { useEntity } from "@replyke/react-js";
+import { Entity, useEntity, useUser } from "@replyke/react-js";
 import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
+import { toast } from "../hooks/use-toast";
 
 const SinglePost = ({
   handleOpen,
 }: {
-  handleOpen: (newReferenceId: string | undefined) => void;
+  handleOpen: (entity: Entity | undefined) => void;
 }) => {
+  const { user } = useUser();
   const {
     entity,
     userDownvotedEntity,
@@ -21,6 +23,7 @@ const SinglePost = ({
   const downvotesCount = entity?.downvotes.length || 0;
 
   const handleUpvote = () => {
+    if (!user) return toast({ title: "Please login first" });
     if (userUpvotedEntity) {
       removeEntityUpvote?.();
     } else {
@@ -56,7 +59,7 @@ const SinglePost = ({
           )}
         >
           {userUpvotedEntity ? "Upvoted" : "Upvote"}
-          <span className="ml-2 text-gray-600">({upvotesCount})</span>
+          <span>({upvotesCount})</span>
         </Button>
 
         {/* Downvote Button */}
@@ -65,19 +68,19 @@ const SinglePost = ({
           size="sm"
           className={cn(
             "cursor-pointer",
-            userUpvotedEntity
-              ? "bg-green-500 text-white"
+            userDownvotedEntity
+              ? "bg-red-500 text-white"
               : "bg-gray-200 text-gray-800"
           )}
         >
           {userDownvotedEntity ? "Downvoted" : "Downvote"}
-          <span className="ml-2 text-gray-600">({downvotesCount})</span>
+          <span>({downvotesCount})</span>
         </Button>
       </div>
 
       {/* Open Discussion Button */}
       <Button
-        onClick={() => handleOpen(entity?.id)}
+        onClick={() => handleOpen(entity)}
         className="w-full mt-4 cursor-pointer"
       >
         Open Discussion{" "}
