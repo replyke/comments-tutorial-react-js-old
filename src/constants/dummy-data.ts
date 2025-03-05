@@ -18,12 +18,6 @@ const users = [
   { id: "user2", username: "diego_maradona" },
   { id: "user3", username: "pele" },
   { id: "user4", username: "ronaldo" },
-  // { id: "user5", username: "daniel567" },
-  // { id: "user6", username: "chris88" },
-  // { id: "user7", username: "lucy999" },
-  // { id: "user8", username: "kate77" },
-  // { id: "user9", username: "noah321" },
-  // { id: "user10", username: "olivia654" },
 ];
 
 export { posts, users };

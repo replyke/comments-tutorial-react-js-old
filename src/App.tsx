@@ -57,7 +57,7 @@ function App() {
       <div className="h-screen grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-12 gap-4 md:gap-8 lg:gap-12 m-auto">
         {posts.map((post) => (
           <EntityProvider referenceId={post.id} key={post.id}>
-            <SinglePost handleOpen={handleOpen} key={post.id} />
+            <SinglePost handleOpen={handleOpen} />
           </EntityProvider>
         ))}
       </div>
